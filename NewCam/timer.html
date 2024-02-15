@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f3f3f3;
+            font-family: Arial, sans-serif;
+        }
+
+        #countdown {
+            text-align: center;
+            color: red;
+        }
+
+        div {
+            font-size: 3em;
+        }
+    </style>
+    <link rel="stylesheet" href="timer.css">
+</head>
+
+<body>
+    <div id="countdown">
+        <h1>Countdown Timer</h1>
+        <div>
+            <span id="minutes">00</span>:
+            <span id="seconds">00</span>:
+            <span id="milliseconds">00</span>
+        </div>
+    </div>
+
+    <div class="joystick">
+        <div class="circle"></div>
+        <div class="triangle up"></div>
+        <div class="triangle right"></div>
+        <div class="triangle down"></div>
+        <div class="triangle left"></div>
+    </div>
+
+    <script src="timer.js">
+    </script>
+</body>
+
+</html>

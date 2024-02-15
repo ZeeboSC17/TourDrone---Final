@@ -1,0 +1,179 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background: #000000;
+  margin: 0;
+  padding: 0;
+  overscroll-behavior: none;
+  overflow: hidden;
+}
+
+.left-controls {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  z-index: 10;
+}
+
+.right-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  z-index: 10;
+}
+
+
+#take-picture-button {
+  position: absolute;
+  top: 45%;
+  left: 10px;
+}
+
+
+.timer {
+  position: absolute;
+  display: flex;
+  top: 2%;
+  right: 2%;
+  width: 20%;
+  height: 10%;
+  border: 3px solid rgba(255, 255, 255, 0.397);
+  background: rgba(0, 0, 0, 0.6);
+  font-size: 5em;
+  font-weight: bold;
+  color: red;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.button {
+  width: 200px;
+  height: 40px;
+  font-size: 20px;
+  background-color: #ccc;
+  margin: 5px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.button.active {
+  background-color: #00f;
+  /* Highlighted color */
+  color: #fff;
+  /* Text color when active */
+}
+
+
+
+.ascend-descend {
+  position: absolute;
+  bottom: 30px;
+  display: flex;
+  right: 40%;
+  left: 40%;
+  background: rgba(0, 0, 0, 0.6);
+  border: 3px solid rgba(255, 255, 255, 0.397);
+
+}
+
+.asc-dsc {
+  display: block;
+  width: 50%;
+  height: 50%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#ascend-button {
+  transform: translateX(-9%);
+}
+
+#descend-button {
+  transform: translateX(-9%);
+}
+
+
+.right-stick {
+  bottom: 10%;
+  right: 5%;
+  position: absolute;
+  display: flex;
+}
+
+.left-stick {
+  bottom: 10%;
+  left: 5%;
+  position: absolute;
+  display: flex;
+}
+
+
+
+.joystick {
+  /* position: absolute; */
+  width: 250px;
+  height: 250px;
+  border: 10px solid rgba(255, 255, 255, 0.397);
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.circle {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  background-color: red;
+  border-radius: 50%;
+  z-index: 1;
+  /* background: radial-gradient(circle at 100px 100px, #28f70d, #200be0); */
+  background-color: rgb(255, 255, 255);
+}
+
+.triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  z-index: 2;
+  border-width: 20px;
+}
+
+.up {
+  top: 1%;
+  left: 50%;
+  border-color: transparent transparent rgb(0, 255, 0) transparent;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom, #f7300d, #111111);
+
+}
+
+.right {
+  top: 50%;
+  right: 1%;
+  border-color: transparent transparent transparent rgb(0, 255, 0);
+  transform: translateY(-50%);
+}
+
+.down {
+  bottom: 1%;
+  left: 50%;
+  border-color: rgb(0, 255, 0) transparent transparent transparent;
+  transform: translateX(-50%);
+}
+
+.left {
+  top: 50%;
+  left: 1%;
+  border-color: transparent rgb(0, 255, 0) transparent transparent;
+  transform: translateY(-50%);
+}

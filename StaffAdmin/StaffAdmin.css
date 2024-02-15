@@ -1,0 +1,91 @@
+body {
+  text-align: center;
+  background-color: #021927;
+  color: white;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#viewing-box {
+  position: relative;
+  display: inline-block;
+}
+
+#weather-overlay {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+}
+
+#overlay-img {
+  width: 800px;
+  height: 487px;
+  object-fit: cover;
+}
+
+#viewing-img {
+  border: solid;
+  border-color: yellow;
+  width: 800px;
+  height: 487px;
+}
+
+.camera-btn {
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.observe-btn {
+  cursor: pointer;
+  background-color: yellow;
+  color: black;
+  border: solid;
+  border-color: yellow;
+  border-radius: 5px;
+  width: 150px;
+  height: 50px;
+  font-size: 20px;
+}
+
+#booking-header {
+  font-size: 30px;
+  color: red;
+}
+
+#booked-sessions {
+  margin-top: -10px;
+  display: inline-block;
+  margin-right: 20px;
+  line-height: 200%;
+  border-spacing: 20px;
+}
+
+#main-menu-button {
+  background-color: #737373;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 100px;
+  position: absolute;
+  top: 1%;
+  left: 2%;
+}
+
+#main-menu-button:hover {
+  background-color: #7a7a7a;
+  color: #fff;
+}

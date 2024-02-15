@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Basic 3D World</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="base.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="controls">
+    <div class="left-controls">
+      <button id="left-button-up" class="button">[W] Forwards</button>
+      <button id="left-button-down" class="button">[S] Backwards</button>
+      <button id="left-button-left" class="button">[A] Left</button>
+      <button id="left-button-right" class="button">[D] Right</button>
+    </div>
+    <div class="right-controls">
+      <button id="right-button-up" class="button">↑ Rotate Up</button>
+      <button id="right-button-down" class="button">↓ Rotate Down</button>
+      <button id="right-button-left" class="button">← Rotate Left</button>
+      <button id="right-button-right" class="button">→ Rotate Right</button>
+    </div>
+  </div>
+  <div class="ascend-descend row text-center">
+    <div class="col-6 text-center">
+      <img class="asc-dsc text-center mt-2" src="resources/ascend.png" alt="">
+      <button id="ascend-button" class="button mt-3">[ ⎵ ] Ascend</button>
+    </div>
+    <div class="col-6 text-center">
+      <img class="asc-dsc mt-2" src="resources/descend.png" alt="">
+      <button id="descend-button" class="button mt-3 ">[ALT] Descend</button>
+    </div>
+  </div>
+  <button id="take-picture-button" class="button">[P] Take Picture</button>
+  <div class="timer">
+    <span id="minutes">00</span>:
+    <span id="seconds">00</span>:
+    <span id="milliseconds">00</span>
+  </div>
+  <div class="left-stick">
+    <div class="joystick">
+      <div class="circle"></div>
+      <div class="triangle up"></div>
+      <div class="triangle right"></div>
+      <div class="triangle down"></div>
+      <div class="triangle left"></div>
+    </div>
+  </div>
+  <div class="right-stick">
+    <div class="joystick">
+      <div class="circle"></div>
+      <div class="triangle up"></div>
+      <div class="triangle right"></div>
+      <div class="triangle down"></div>
+      <div class="triangle left"></div>
+    </div>
+  </div>
+  <script src="./main.js" type="module">
+  </script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

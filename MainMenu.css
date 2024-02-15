@@ -1,0 +1,180 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.main-title {
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  font-size: 32px;
+  color: rgb(255, 0, 255);
+}
+
+header {
+  font-family: Franklin Gothic Medium;
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+
+}
+
+.s-highlight {
+  color: #02f202;
+}
+
+#map {
+  text-align: center;
+  /* padding: 20px; */
+
+}
+
+.map-img {
+  width: 100%;
+  height: 57vh;
+  margin: 0;
+}
+
+.map-caption {
+  text-align: center;
+}
+
+#flybtn {
+  display: none;
+}
+
+#redbtn {
+  display: none;
+}
+
+.availability {
+  color: red;
+  display: none;
+}
+
+#available {
+  color: green;
+  display: none;
+}
+
+
+#menu {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  left: 20%;
+  right: 20%;
+}
+
+#left-menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 1%;
+}
+
+#big-button {
+  display: inline-block;
+  color: antiquewhite;
+  height: 25px;
+}
+
+.attractive-button {
+  display: inline-block;
+  padding: 15px 30px;
+  background-color: #545454;
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 10px;
+  margin: 10px;
+  width: 100%;
+}
+
+#right-menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 1%;
+}
+
+.text-button {
+  display: inline-block;
+  padding: 10px;
+  background-color: #ccc;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+
+.map-icon-button {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+#L1 {
+  left: 10%;
+  top: 20%;
+}
+
+#L3 {
+  left: 35%;
+  top: 40%;
+}
+
+#L2 {
+  left: 32%;
+  top: 15%;
+}
+
+#L4 {
+  left: 70%;
+  top: 30%;
+}
+
+.staff-sign {
+  position: absolute;
+  top: -7%;
+  right: 3%;
+  margin-top: 100px;
+}
+
+.staff {
+  font-size: 2em;
+
+}
+
+
+.stybtn {
+  background-color: #545454;
+  color: white;
+  font-weight: bold;
+  font-size: 200%;
+  width: 100%;
+  height: 20%;
+  border-radius: 5%;
+}
+
+
+
+.srow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.frow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,457 @@
+/* Setting the body to cover the entire page */
+body {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background: #000000;
+  margin: 0;
+  padding: 0;
+  overscroll-behavior: none;
+  overflow: hidden;
+}
+
+
+/* This div is needed to cover the whole page to prevent glitches. By default, if the mouse is clicked while the cursor is not hovering over any html elements (aside from the body), then it will affect the camera position which causes glitches in our system. To prevent that glitch, the cover-page div is used so that the mouse is always hovering over an element making the mouse clik not have an effect on the camera. */
+#cover-page {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  z-index: 0;
+}
+
+/* This is the default styles for all the buttons on the page.  */
+.button {
+  width: 200px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  border: 3px solid rgba(255, 255, 255, 0.397);
+  background: rgba(0, 0, 0, 0.6);
+  margin: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+/* This is the style for when a button or control is currently in use.  */
+.button.active {
+  background-color: #00f;
+}
+
+
+/* The next eight sections are for the "WASD" controls on the bottom-left of the screen and the Arrow Keys controls on the bottom-right of the screen. */
+#left-button-up {
+  position: absolute;
+  display: flex;
+  top: 56%;
+  justify-content: center;
+  left: 8.5%;
+  width: 5%;
+  height: auto;
+}
+
+#left-button-down {
+  position: absolute;
+  display: flex;
+  top: 91%;
+  justify-content: center;
+  left: 8.5%;
+  width: 5%;
+  height: auto;
+}
+
+#left-button-left {
+  position: absolute;
+  display: flex;
+  top: 75%;
+  justify-content: center;
+  left: 0.5%;
+  width: 3.5%;
+  height: auto;
+}
+
+#left-button-right {
+  position: absolute;
+  display: flex;
+  top: 75%;
+  justify-content: center;
+  left: 18.5%;
+  width: 3.5%;
+  height: auto;
+}
+
+#right-button-up {
+  position: absolute;
+  display: flex;
+  top: 56%;
+  justify-content: center;
+  right: 8.5%;
+  width: 5%;
+  height: auto;
+}
+
+#right-button-down {
+  position: absolute;
+  display: flex;
+  top: 91%;
+  justify-content: center;
+  right: 8.5%;
+  width: 5%;
+  height: auto;
+}
+
+#right-button-left {
+  position: absolute;
+  display: flex;
+  top: 75%;
+  justify-content: center;
+  right: 18.5%;
+  width: 3.5%;
+  height: auto;
+}
+
+#right-button-right {
+  position: absolute;
+  display: flex;
+  top: 75%;
+  justify-content: center;
+  right: 0.5%;
+  width: 3.5%;
+  height: auto;
+}
+
+/* .left-controls {
+  position: absolute;
+  top: 20%;
+  left: 10px;
+  display: flex;
+  z-index: 10;
+} */
+
+/* .right-controls {
+  position: absolute;
+  top: 20%;
+  right: 10px;
+  display: flex;
+  z-index: 10;
+} */
+
+
+
+/* The next three sections are for the camera options on the middle-left of the page. */
+#take-picture-button {
+  position: absolute;
+  top: 25%;
+  left: 1%;
+}
+
+#zoom-in-button {
+  position: absolute;
+  top: 33%;
+  left: 1%;
+}
+
+#zoom-out-button {
+  position: absolute;
+  top: 38%;
+  left: 1%;
+}
+
+/* The next two sections are for the timer on the top right of the page. */
+.timer {
+  position: absolute;
+  display: flex;
+  top: 2%;
+  right: 1%;
+  width: 30%;
+  height: 15%;
+  border: 3px solid rgba(255, 255, 255, 0.397);
+  background: rgba(0, 0, 0, 0.6);
+  font-size: 5em;
+  font-weight: bold;
+  color: red;
+  justify-content: center;
+  align-items: center;
+}
+
+#t_text {
+  position: absolute;
+  display: flex;
+  font-size: 1em;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  top: 2.5%;
+  right: 15%;
+}
+
+/* The next ten sections are for the minimap of the top-left of the page. It consists of a minimap that has two points. One that moves corresponding to the drone, the green one. The other that is stationary placed with the corresponding position of the point of interest. A legend is included as well.  */
+.minimap {
+  position: absolute;
+  display: flex;
+  top: 2%;
+  left: 1%;
+  width: 30%;
+  height: 15%;
+  border: 3px solid rgba(255, 255, 255, 0.397);
+  background: rgba(0, 0, 0, 0.6);
+  font-size: 5em;
+  font-weight: bold;
+  color: red;
+  justify-content: center;
+  align-items: center;
+}
+
+#mm_text {
+  position: absolute;
+  display: flex;
+  font-size: 1em;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  top: 2.5%;
+  left: 15%;
+}
+
+.legend {
+  position: absolute;
+  display: flex;
+  top: 2%;
+  left: 31.05%;
+  width: 5%;
+  height: 15%;
+  border: 3px solid rgba(255, 255, 255, 0.397);
+  background: rgba(0, 0, 0, 0.6);
+
+}
+
+#legend_text {
+  position: absolute;
+  display: flex;
+  font-size: 1em;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  top: 1%;
+  left: 15%;
+}
+
+#point {
+  /* position: absolute;
+  display: flex;
+  width: 2.5%;
+  height: 10%;
+  border: 3px solid rgba(255, 255, 255, 0.397);
+
+  background: green;
+  color: red; */
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  /* Adjust size as needed */
+  border-right: 8px solid transparent;
+  /* Adjust size as needed */
+  border-bottom: 25px solid #00ff00;
+  z-index: 1;
+}
+
+#interest {
+  position: absolute;
+  display: flex;
+  width: 2.5%;
+  height: 10%;
+  border: 3px solid rgba(255, 255, 255, 0.397);
+  background: rgb(248, 0, 0);
+  color: red;
+  transform: translate(1450%, 65%);
+}
+
+#legend_point {
+  position: absolute;
+  display: flex;
+  width: 17%;
+  height: 10%;
+  border: 3px solid rgba(255, 255, 255, 0.397);
+  background: green;
+  color: red;
+  top: 40%;
+  left: 15%;
+
+}
+
+#legend_interest {
+  position: absolute;
+  display: flex;
+  width: 17%;
+  height: 10%;
+  border: 3px solid rgba(255, 255, 255, 0.397);
+  background: rgb(248, 0, 0);
+  color: red;
+  top: 65%;
+  left: 15%
+}
+
+#p_text {
+  position: absolute;
+  display: flex;
+  font-size: 1em;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  top: 37%;
+  left: 45%;
+}
+
+#i_text {
+  position: absolute;
+  display: flex;
+  font-size: 1em;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  top: 62%;
+  left: 45%;
+}
+
+
+/* The next four sections are for the ascend and descend buttons at the middle-bottom of the page. */
+.ascend-descend {
+  position: absolute;
+  bottom: 2%;
+  display: flex;
+  right: 40%;
+  left: 40%;
+  background: rgba(0, 0, 0, 0.6);
+  border: 3px solid rgba(255, 255, 255, 0.397);
+
+}
+
+.asc-dsc {
+  display: block;
+  width: 50%;
+  height: 50%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#ascend-button {
+  transform: translateX(-9%);
+}
+
+#descend-button {
+  transform: translateX(-9%);
+}
+
+
+/* These two sections are for the two joysticks on the bottom-left and bottom-right of the page. They are meant to simulate the joysticks that are often featured on touchscreen video games. */
+.right-stick {
+  bottom: 12.5%;
+  right: 5.5%;
+  position: absolute;
+  display: flex;
+}
+
+.left-stick {
+  bottom: 12.5%;
+  left: 5.5%;
+  position: absolute;
+  display: flex;
+}
+
+
+/* The next seven sections are for the default look of the joysticks.  */
+.joystick {
+  /* position: absolute; */
+
+  width: 12vw;
+  height: 12vw;
+  /* 
+  width: 100%;
+  height: 100%; */
+
+  border: 10px solid rgba(255, 255, 255, 0.397);
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.circle {
+  position: absolute;
+  /* width: 70px; */
+  /* height: 70px; */
+
+  width: 30%;
+  height: 30%;
+
+  background-color: red;
+  border-radius: 50%;
+  z-index: 1;
+  /* background: radial-gradient(circle at 100px 100px, #28f70d, #200be0); */
+  background-color: rgb(255, 255, 255);
+}
+
+.triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  z-index: 2;
+  border-width: 20px;
+}
+
+.up {
+  top: 1%;
+  left: 50%;
+  border-color: transparent transparent rgb(0, 255, 0) transparent;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom, #f7300d, #111111);
+
+}
+
+.right {
+  top: 50%;
+  right: 1%;
+  border-color: transparent transparent transparent rgb(0, 255, 0);
+  transform: translateY(-50%);
+}
+
+.down {
+  bottom: 1%;
+  left: 50%;
+  border-color: rgb(0, 255, 0) transparent transparent transparent;
+  transform: translateX(-50%);
+}
+
+.left {
+  top: 50%;
+  left: 1%;
+  border-color: transparent rgb(0, 255, 0) transparent transparent;
+  transform: translateY(-50%);
+}
+
+
+.main-menu {
+  position: absolute;
+  top: 25%;
+  right: 1%;
+}
+
+.extension {
+  position: absolute;
+  top: 30%;
+  right: 1%;
+}
+
+/* 
+.campos {
+  position: absolute;
+  top: 40%;
+  bottom: 40%;
+  width: 100%;
+  display: flex;
+  background: rgba(0, 0, 0, 0.6);
+  border: 3px solid rgba(255, 255, 255, 0.397);
+  color: white;
+  font-size: 50px;
+} */

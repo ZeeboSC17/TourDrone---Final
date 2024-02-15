@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="MainMenu.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+  <header>
+    <h1>Welcome to Wild<span class="s-highlight">S</span>erpent <span class="s-highlight">S</span>afari
+      Adventures
+    </h1>
+  </header>
+  <div id="map">
+    <img class="map-img" src="mainmap-2.jpeg" alt="Serengeti Safari Map">
+    <button onclick="selectButton('Plains', 8);" class="btn btn-success map-icon-button" id="L1">Plains</button>
+    <button onclick="selectButton('Savanna', 0);" class="btn btn-info map-icon-button" id="L2">Savanna</button>
+    <button onclick="selectButton('Watering Hole', 9);" class="btn btn-danger map-icon-button" id="L3">Watering
+      Hole</button>
+    <button onclick="selectButton('Woodlands', 12);" class="btn btn-primary map-icon-button" id="L4">Woodlands</button>
+  </div>
+
+  <div class="map-caption">
+    <h3>&#8593; TourDrones Available &#8593;</h3>
+    <h4 id="selection-info">Please Select a Location on the Map.</h4>
+
+    <h5 id="available" class="availability">The queue is OPEN. Click on the "Fly TourDrone ..." button below to go
+      directly to your flight.
+      Also, make sure
+      that
+      you have reviewed the Training pages first.</h5>
+
+    <button class="btn btn-info" id="flybtn" onclick="flyButtonClicked()">Fly TourDrone</button>
+
+
+    <h5 class="availability" id="none-available">The Queue for this location is . To
+      reserve a drone at
+      [Watering Hole], click the "Join Queue" button below or "Reserve" button for a later booking or select a
+      different Exhibit to visit. </h5>
+    <button class="btn btn-warning" id="redbtn" onclick="redirectToQueue()">Join Queue</button>
+  </div>
+
+  <div id="menu" class="row frow">
+    <a href="Booking/BookingHub.html" class=" col-4">
+      <button class="stybtn">Booking/Queue</button>
+    </a>
+    <a href="Gallery/gallery.html" class="col-4">
+      <button class="stybtn">Gallery</button>
+    </a>
+    <a href="Exhibits/exhibits.html" class="col-4">
+      <button class="stybtn">Exhibits</button>
+    </a>
+  </div>
+  <div class="row srow">
+    <a href="Training/training.html" class="col-5">
+      <button class="stybtn">Training</button>
+    </a>
+    <a href="flightTraining/flight.html" class="col-5">
+      <button class="stybtn">Flight Training</button>
+    </a>
+  </div>
+
+  <div class="staff-sign row text-center">
+    <button onclick="handleButtonClick();" class="btn btn-success staff" id="password-button">Enter Administrative
+      Mode</button>
+  </div>
+
+  <script src="MainMenu.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

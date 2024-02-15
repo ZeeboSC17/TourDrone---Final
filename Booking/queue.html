@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="queue.css">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <title>TourDrone Queueing</title>
+</head>
+
+<body>
+  <h1>TourDrone Queueing Page</h1>
+  <p style="text-align: center;">Choose a TourDrone POI to line up for the queue!</p>
+  <a href="BookingHub.html" class="mainmenu">
+    <button id="main-menu-button">Booking Hub</button>
+  </a>
+
+  <div class="destinations">
+    <div class="destination" data-poi="Watering Hole">
+      <img src="https://ichef.bbci.co.uk/images/ic/1920x1080/p08zqk32.jpg" alt="Watering Hole">
+      <div class="destination-info">Watering Hole</div>
+    </div>
+
+    <div class="destination" data-poi="Savannah">
+      <img
+        src="https://www.toptourist.com/wp-content/uploads/2019/07/savannah-landscape-in-the-national-park-of-kenya-P56CU7Y-1.jpg"
+        alt="Savannah">
+      <div class="destination-info">Savannah</div>
+    </div>
+
+    <div class="destination" data-poi="Woodlands">
+      <img
+        src="https://www.treehugger.com/thmb/5j2ByCXXwhXCWIg0wBENSA2cEdM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/lightenteringaforest-cdd2072b5cb445f897aa3b08cba41ba9.jpeg"
+        alt="Woodlands">
+      <div class="destination-info">Woodlands</div>
+    </div>
+
+    <div class="destination" data-poi="Plains">
+      <img
+        src="https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/tallgrass-prairie-preserve-by-mike-fuhr.jpg?crop=0%2C271%2C3885%2C2136&wid=4000&hei=2200&scl=0.97125"
+        alt="Plains">
+      <div class="destination-info">Plains</div>
+    </div>
+  </div>
+
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="queueTitle"></h2>
+      <p id="queueInfo"></p>
+      <form id="contactForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required><br>
+
+        <button type="button" id="lineUpButton">Join Queue</button>
+      </form>
+      <p id="remainingTime"></p>
+    </div>
+  </div>
+
+  <button id="myQueueButton">My Queue</button>
+
+  <!-- My Queue Modal -->
+  <div id="myQueueModal" class="modal">
+    <div class="modal-cont">
+      <span class="close" id="closeMyQueueModal">&times;</span>
+      <h2 style="text-align: center;">My Queue</h2>
+      <ul id="queueList"></ul>
+    </div>
+  </div>
+
+  <!-- TourDrone Ready Modal -->
+  <div id="tourDroneReadyModal">
+    <div id="tourDroneReadyContent">
+      <h2 style="color: red;">TourDrone Ready Confirmation + Warning</h2>
+      <p>You see this screen because your queue time is less than 5 minutes.</p>
+      <p id="tourDroneTimer">The Remaining Time for your Queue is: 30s</p>
+      <p>When the queue finishes, you will be able to access the TourDrone. You are required to stay on this screen to
+        remain in the queue!</p>
+      <button id="accessTourDroneButton">Access TourDrone</button>
+      <br>
+      <button id="unconfirmTourDroneReady" onclick="flyButtonClicked()">Delete</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var modal = document.getElementById("myModal");
+      var closeButton = document.getElementsByClassName("close")[0];
+      var poi;
+      var tourDroneReadyModal = document.getElementById("tourDroneReadyModal");
+
+      // Initialize default values for each POI
+      var poiData = {
+        "Watering Hole": {queueTime: 2700},
+        "Savannah": {queueTime: 0},
+        "Woodlands": {queueTime: 3600},
+        "Plains": {queueTime: 2400}
+      };
+
+      // Retrieve the number of people and remaining time from sessionStorage
+      var numberOfPeople = parseInt(localStorage.getItem("numberOfPeople")) || 0;
+      var remainingTime = parseInt(localStorage.getItem("remainingTime")) || 0;
+
+      // Initialize the queue information
+      updateQueueInfo();
+
+      var destinations = document.querySelectorAll(".destination");
+
+      destinations.forEach(function (destination) {
+        destination.addEventListener("click", function () {
+          poi = destination.getAttribute("data-poi");
+          var queueTime = poiData[poi].queueTime; // Retrieve queueTime from the initialized data
+
+          document.getElementById("queueTitle").innerText = poi;
+          document.getElementById("queueInfo").innerText = "Queue Information for " + poi;
+
+          // Initialize the number of people and remaining time
+          numberOfPeople = calculateNumberOfPeople(queueTime);
+          remainingTime = calculateApproximateTime(numberOfPeople);
+
+          // Update the modal
+          updateQueueInfo();
+
+          modal.style.display = "block";
+        });
+      });
+
+      closeButton.addEventListener("click", function () {
+        modal.style.display = "none";
+      });
+
+      window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+
+      // Save queue information before the user navigates away
+      window.addEventListener('beforeunload', function () {
+        saveQueueInfo();
+      });
+
+
+
+      document.getElementById("lineUpButton").addEventListener("click", function () {
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var phone = document.getElementById("phone").value;
+
+        if (!name || !email || !phone) {
+          alert("Please fill in all fields.");
+          return;
+        }
+
+        var queueTime = poiData[poi].queueTime;
+
+        numberOfPeople++; // Increment the number of people
+        remainingTime = calculateApproximateTime(numberOfPeople);
+
+        // Save the updated queue information to localStorage
+        saveQueueInfo();
+
+        // Add the joined queue to myQueues
+        addToMyQueues({queue: poi, name, email, phone, elapsedTime: 0});
+        updateQueueInfo();
+        alert("Thank you, " + name + "! You have joined the queue.");
+
+
+        if (numberOfPeople === 1) {
+          showTourDroneReadyWarning();
+        }
+      });
+
+      document.getElementById("unconfirmTourDroneReady").addEventListener("click", function () {
+        // Add your logic to remove the user from the queue if they click "No"
+        // For demonstration purposes, let's remove the queue from stored queues
+        var storedQueues = JSON.parse(localStorage.getItem("myQueues")) || [];
+        var updatedQueues = storedQueues.filter(function (item) {
+          return item.queue !== poi;
+        });
+        localStorage.setItem("myQueues", JSON.stringify(updatedQueues));
+
+        // Close the TourDrone Ready Modal
+        tourDroneReadyModal.style.display = "none";
+        modal.style.display = "none";
+
+      });
+
+      function showTourDroneReadyWarning() {
+        var timerCount = 30; // 30 seconds
+        var timerElement = document.getElementById("tourDroneTimer");
+        var accessButton = document.getElementById("accessTourDroneButton");
+
+        tourDroneReadyModal.style.display = "flex";
+
+        function updateTimer() {
+          var minutes = Math.floor(timerCount / 60);
+          var seconds = timerCount % 60;
+          timerElement.innerText = "Remaining Time: " + minutes + "m " + seconds + "s";
+
+          if (timerCount > 0) {
+            // Disable the button if remaining time is 5 seconds or more
+            accessButton.disabled = timerCount >= 10;
+            timerCount--;
+          } else {
+            // Enable the button when time expires
+            accessButton.disabled = false;
+            clearInterval(timerInterval); // Stop the timer
+            timerElement.innerText = "Time Expired!";
+          }
+        }
+
+        updateTimer(); // Initial call to set the initial timer text
+
+        var timerInterval = setInterval(updateTimer, 1000);
+
+        document.getElementById("unconfirmTourDroneReady").addEventListener("click", function () {
+          clearInterval(timerInterval); // Stop the timer
+          tourDroneReadyModal.style.display = "none";
+          alert("You have been removed from the queue.");
+        });
+
+        accessButton.addEventListener("click", function () {
+          alert("Accessing TourDrone!");
+          window.location.href = "../NewCam/3D Camera.html";
+          tourDroneReadyModal.style.display = "none"; // Close the modal after accessing TourDrone
+        });
+      }
+
+
+      function calculateRemainingTimeUntilControl(queueTimeInSeconds, elapsedTime) {
+        var remainingTime = queueTimeInSeconds - elapsedTime;
+        return remainingTime > 0 ? remainingTime : 0;
+      }
+
+      function updateQueueInfo() {
+        // Update the displayed information in the modal
+        document.getElementById("remainingTime").innerText =
+          "\n" +
+          "Availability:\n" + "\n" +
+          "Number of people in the queue: " + numberOfPeople +
+          "\nApproximate waiting time: " + remainingTime + " minutes";
+      }
+
+      function saveQueueInfo() {
+        // Save the queue information to localStorage
+        localStorage.setItem("numberOfPeople", numberOfPeople);
+        localStorage.setItem("remainingTime", remainingTime);
+      }
+
+      function calculateNumberOfPeople(queueTimeInSeconds) {
+        // Assuming each person takes up 5 minutes of waiting time
+        var timePerPerson = 5;
+
+        // Calculate the number of people in the queue
+        return Math.ceil(queueTimeInSeconds / (timePerPerson * 60));
+      }
+
+      function calculateApproximateTime(numberOfPeople) {
+        // Assuming an average processing time of 5 minutes per person
+        var averageProcessingTime = 5;
+
+        // Calculate approximate queue time
+        return numberOfPeople * averageProcessingTime;
+      }
+
+      // My Queue button click event
+      document.getElementById("myQueueButton").addEventListener("click", function () {
+        displayMyQueue();
+      });
+
+      // Close My Queue Modal
+      document.getElementById("closeMyQueueModal").addEventListener("click", function () {
+        document.getElementById("myQueueModal").style.display = "none";
+      });
+
+      function flyButtonClicked() {
+        window.location.href = "./NewCam/3D Camera.html";
+      }
+
+      function displayMyQueue() {
+        var myQueueModal = document.getElementById("myQueueModal");
+        var queueList = document.getElementById("queueList");
+        queueList.innerHTML = ""; // Clear the previous content
+
+        // Fetch and display user's queues and contact information
+        var storedQueues = JSON.parse(localStorage.getItem("myQueues")) || [];
+
+        if (storedQueues.length === 0) {
+          queueList.innerHTML = "<p style='text-align: center;'>You are not in any queues.</p>";
+        } else {
+          storedQueues.forEach(function (item) {
+            var listItem = document.createElement("li");
+            var remainingTime = calculateRemainingTimeUntilControl(poiData[item.queue].queueTime, item.elapsedTime || 0);
+
+            listItem.innerHTML =
+              "<strong>Queue:</strong> " + item.queue +
+              "<br><strong>Name:</strong> " + item.name +
+              "<br><strong>Email:</strong> " + item.email +
+              "<br><strong>Phone:</strong> " + item.phone +
+              "<br><strong>Remaining Time until Control:</strong> <span id='timer-" + item.queue + "'>" + formatTime(remainingTime) + "</span>";
+
+            var removeButton = document.createElement("button");
+            removeButton.textContent = "Remove";
+            removeButton.className = 'remove-button';
+
+            removeButton.addEventListener("click", function () {
+              removeQueue(item.queue);
+              displayMyQueue(); // Refresh the list after removal
+            });
+            listItem.appendChild(removeButton);
+            queueList.appendChild(listItem);
+
+            startTimer(item.queue, remainingTime);
+          });
+        }
+
+        myQueueModal.style.display = "block";
+      }
+
+      function formatTime(seconds) {
+        var minutes = Math.floor(seconds / 60);
+        var remainingSeconds = seconds % 60;
+        return minutes + "m " + remainingSeconds + "s";
+      }
+
+      function startTimer(queueName, remainingTime) {
+        var timerElement = document.getElementById("timer-" + queueName);
+        var intervalId = setInterval(function () {
+          remainingTime--;
+          if (remainingTime < 0) {
+            clearInterval(intervalId);
+            timerElement.innerText = "Expired";
+          } else {
+            timerElement.innerText = formatTime(remainingTime);
+          }
+        }, 1000);
+      }
+
+      // Remove the user from a specific queue
+      function removeQueue(queueName) {
+        // Add your logic to remove the user from the queue
+        // For demonstration purposes, let's remove the queue from stored queues
+        var storedQueues = JSON.parse(localStorage.getItem("myQueues")) || [];
+        var updatedQueues = storedQueues.filter(function (item) {
+          return item.queue !== queueName;
+        });
+        localStorage.setItem("myQueues", JSON.stringify(updatedQueues));
+      }
+
+      function addToMyQueues(userInfo) {
+        var storedQueues = JSON.parse(localStorage.getItem("myQueues")) || [];
+        storedQueues.push(userInfo);
+        localStorage.setItem("myQueues", JSON.stringify(storedQueues));
+      }
+    });
+  </script>
+
+</body>
+
+</html>

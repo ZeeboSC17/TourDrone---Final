@@ -1,0 +1,68 @@
+body {
+  background-color: #333;
+  /* Dark gray background */
+  color: white;
+  /* White text */
+  font-family: Arial, sans-serif;
+  /* Optional: Adjust font-family as needed */
+}
+
+#main-menu-button {
+  background-color: gray;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#main-menu-button:hover {
+  background-color: darkgray;
+  color: #fff;
+}
+
+.container {
+  max-width: 60%;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  /* Center align content */
+}
+
+.title {
+  text-align: center;
+}
+
+.content {
+  margin-bottom: 30px;
+  text-align: left;
+  line-height: 2;
+  /* Left align text in content */
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* Three columns */
+  gap: 20px;
+  /* Space between cards */
+  justify-items: center;
+  /* Center align cards */
+}
+
+.card {
+  width: 250px;
+  /* Fixed width for cards */
+  background-color: #555;
+  /* Lighter background color for cards */
+  padding: 15px;
+  margin: 10px;
+  border-radius: 5px;
+  text-align: left;
+  /* Left align text in cards */
+}
+
+h3 {
+  margin-bottom: 10px;
+}

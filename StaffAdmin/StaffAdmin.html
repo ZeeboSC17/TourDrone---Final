@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin View</title>
+  <link rel="stylesheet" href="StaffAdmin.css">
+  <script src="script.js"></script>
+</head>
+
+<body>
+  <div>
+    <a href="../MainMenu.html" class="mainmenu">
+      <button id="main-menu-button">Main Menu</button>
+    </a>
+  </div>
+  <h1>TourDrone Admin Panel</h1>
+
+  <figure id="viewing-box">
+    <img id="viewing-img" src="../Gallery/plains.webp">
+    <div id="weather-overlay">
+      <img id="overlay-img" src="rainoverlay.jpg">
+    </div>
+  </figure>
+
+  <br>
+  <button class="camera-btn" onclick="changeCamera(1)">Camera 1</button>
+  <button class="camera-btn" onclick="changeCamera(2)">Camera 2</button>
+  <button class="camera-btn" onclick="changeCamera(3)">Camera 3</button>
+
+  <h2>You are currently observing: </h2>
+  <h2 id="current-viewing">Plains</h2>
+  <h3 id="warning-status">Clear Weather - Safe Flying Conditions</h3>
+  <button onclick="changeView('../Gallery/plains.webp', 'Plains'); weatherWarning();" class="observe-btn"
+    id="plains-view">
+    Plains
+  </button>
+  <button onclick="changeView('../Gallery/savanna.jpeg', 'Savanna'); weatherWarning();" class="observe-btn"
+    id="savanna-view">
+    Savanna
+  </button>
+  <button onclick="changeView('../Gallery/wateringhole.jpeg', 'Watering Hole'); weatherWarning();" class="observe-btn"
+    id="wateringhole-view">
+    Watering Hole
+  </button>
+  <button onclick="changeView('../Gallery/woodlands.jpeg', 'Woodlands'); weatherWarning();" class="observe-btn"
+    id="woodlands-view">
+    Woodlands
+  </button>
+
+  <br><br>
+  <h2 id="booking-header">Booked Sessions</h2>
+  <table id="booked-sessions">
+    <tr>
+      <th>Status</th>
+      <th>Name</th>
+      <th>Time</th>
+      <th>POI</th>
+      <th>Actions</th>
+    </tr>
+    <tr>
+      <td id="B1">Booked</td>
+      <td>Arib</td>
+      <td>2:00 PM</td>
+      <td>Plains</td>
+      <td>
+        <button onclick="cancelSession('B1');">Cancel</button>
+      </td>
+    </tr>
+    <tr>
+      <th>Status</th>
+      <th>Name</th>
+      <th>Time</th>
+      <th>POI</th>
+      <th>Actions</th>
+    </tr>
+    <tr>
+      <td id="B2">Booked</td>
+      <td>Het</td>
+      <td>2:10 PM</td>
+      <td>Plains</td>
+      <td>
+        <button onclick="cancelSession('B2');">Cancel</button>
+      </td>
+    </tr>
+    <tr>
+      <th>Status</th>
+      <th>Name</th>
+      <th>Time</th>
+      <th>POI</th>
+      <th>Actions</th>
+    </tr>
+    <tr>
+      <td id="B3">Booked</td>
+      <td>Ateeb</td>
+      <td>2:20 PM</td>
+      <td>Plains</td>
+      <td>
+        <button onclick="cancelSession('B3');">Cancel</button>
+      </td>
+    </tr>
+  </table>
+  <table id="booked-sessions">
+    <tr>
+      <th>Status</th>
+      <th>Name</th>
+      <th>Time</th>
+      <th>POI</th>
+      <th>Actions</th>
+    </tr>
+    <tr>
+      <td id="B4">Booked</td>
+      <td>Sakib</td>
+      <td>2:30 PM</td>
+      <td>Plains</td>
+      <td>
+        <button onclick="cancelSession('B4');">Cancel</button>
+      </td>
+    </tr>
+    <tr>
+      <th>Status</th>
+      <th>Name</th>
+      <th>Time</th>
+      <th>POI</th>
+      <th>Actions</th>
+    </tr>
+    <tr>
+      <td id="B5">Booked</td>
+      <td>Arib</td>
+      <td>4:30 PM</td>
+      <td>Woodlands</td>
+      <td>
+        <button onclick="cancelSession('B5');">Cancel</button>
+      </td>
+    </tr>
+    <tr>
+      <th>Status</th>
+      <th>Name</th>
+      <th>Time</th>
+      <th>POI</th>
+      <th>Actions</th>
+    </tr>
+    <tr>
+      <td id="B6">Booked</td>
+      <td>Sakib</td>
+      <td>5:00 PM</td>
+      <td>Woodlands</td>
+      <td>
+        <button onclick="cancelSession('B6');">Cancel</button>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <script src="StaffAdmin.js"></script>
+</body>
+
+</html>

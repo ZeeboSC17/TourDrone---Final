@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="booking.css">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <title>TourDrone Booking</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #d2d2d2;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .destinations {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin: 10px 0;
+      height: 90vh;
+      width: 100vw;
+    }
+
+    .destination {
+      width: 40%;
+      height: 40%;
+      margin: 10px 0;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      border-radius: 10px;
+      transition: transform 0.3s ease-in-out;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .destination:hover {
+      transform: scale(1.05);
+    }
+
+    .destination img {
+      width: 100%;
+      height: 85%;
+      /* Change this line to 100% */
+      border-radius: 10px 10px 0 0;
+    }
+
+    .destination-info {
+      padding: 10px;
+      text-align: center;
+      color: white;
+      background-color: #333;
+      border-radius: 0 0 10px 10px;
+    }
+
+
+    .booking-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .booking-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 800px;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .booking-image {
+      flex: 0 0 40%;
+    }
+
+    .booking-image img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .booking-details {
+      flex: 0 0 50%;
+      padding: 0 20px;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .booking-contact {
+      flex: 0 0 100%;
+      padding-top: 20px;
+      text-align: left;
+    }
+
+    .booking-list {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fefefe;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 60%;
+      text-align: left;
+      border-radius: 10px;
+      max-width: 400px;
+    }
+
+
+    .booking-contact label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .booking-contact select,
+    .booking-contact input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    .booknow {
+      flex: 0 0 100%;
+      padding-top: 20px;
+      text-align: center;
+      justify-content: end;
+    }
+
+    .closenow {
+      flex: 0 0 100%;
+      padding-top: 20px;
+      text-align: center;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .my-bookings-btn {
+      background-color: gray;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .my-bookings-btn:hover {
+      background-color: darkgray;
+    }
+
+    #main-menu-button {
+      background-color: gray;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    #main-menu-button:hover {
+      background-color: darkgray;
+    }
+
+    .remove-button {
+      color: red;
+      margin-left: 275px;
+      margin-bottom: 20px;
+    }
+
+    .remove-button:hover {
+      cursor: pointer;
+    }
+
+    .closee {
+      margin-top: 20px !important;
+      text-align: center;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid;
+      border-radius: 10px;
+      margin-left: -10px;
+    }
+
+
+    input[type="date"] {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid;
+      border-radius: 10px;
+      margin-left: -10px;
+    }
+
+    #time {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid;
+      border-radius: 10px;
+      margin-left: -10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>TourDrone Booking Page</h1>
+  <a href="BookingHub.html" class="mainmenu">
+    <button id="main-menu-button">Booking Hub</button>
+  </a>
+  <p style="text-align: center;">Click on a Tour Destination to Book!</p>
+  <div class="destinations">
+    <div class="destination" data-poi="Watering Hole">
+      <img src="https://ichef.bbci.co.uk/images/ic/1920x1080/p08zqk32.jpg" alt="Watering Hole">
+      <div class="destination-info">Watering Hole</div>
+    </div>
+
+    <div class="destination" data-poi="Savannah">
+      <img
+        src="https://www.toptourist.com/wp-content/uploads/2019/07/savannah-landscape-in-the-national-park-of-kenya-P56CU7Y-1.jpg"
+        alt="Savannah">
+      <div class="destination-info">Savannah</div>
+    </div>
+
+    <div class="destination" data-poi="Woodlands">
+      <img
+        src="https://www.treehugger.com/thmb/5j2ByCXXwhXCWIg0wBENSA2cEdM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/lightenteringaforest-cdd2072b5cb445f897aa3b08cba41ba9.jpeg"
+        alt="Woodlands">
+      <div class="destination-info">Woodlands</div>
+    </div>
+
+    <div class="destination" data-poi="Plains">
+      <img
+        src="https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/tallgrass-prairie-preserve-by-mike-fuhr.jpg?crop=0%2C271%2C3885%2C2136&wid=4000&hei=2200&scl=0.97125"
+        alt="Plains">
+      <div class="destination-info">Plains</div>
+    </div>
+  </div>
+
+  <div class="booking-modal" id="bookingModal">
+    <div class="booking-content">
+      <div class="booking-image">
+        <img src="" alt="Selected Destination">
+      </div>
+      <div class="booking-details">
+        <h2 style="text-align: center;">Booking Details for <span id="selectedPOI"></span></h2>
+        <p>Avaliability:</p>
+        <p>Please book a slot based on your availability. If a slot is already booked, you will receive an error and
+          must book another slot.</p>
+      </div>
+      <div class="booking-contact">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required>
+        <br>
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" required>
+        <br>
+        <label for="datepicker">Select Date:</label>
+        <input type="date" id="datepicker" name="datepicker" required>
+        <br>
+        <label for="time">Select Time:</label>
+        <select id="time" name="time" required>
+          <option value="09:00">9:00 AM</option>
+          <option value="09:30">9:30 AM</option>
+          <option value="10:00">10:00 AM</option>
+          <option value="10:30">10:30 AM</option>
+          <option value="11:00">11:00 AM</option>
+          <option value="11:30">11:30 AM</option>
+          <option value="13:00">1:00 PM</option>
+          <option value="13:30">1:30 PM</option>
+          <option value="14:00">2:00 PM</option>
+          <option value="14:30">2:30 PM</option>
+          <option value="15:00">3:00 PM</option>
+          <option value="15:30">3:30 PM</option>
+          <option value="16:00">4:00 PM</option>
+          <option value="16:30">4:30 PM</option>
+          <option value="17:00">5:00 PM</option>
+        </select>
+      </div>
+      <div class="booknow">
+        <button onclick="bookNow()">Book Now</button>
+      </div>
+      <div class="closenow">
+        <button onclick="closeBookingModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <button class="my-bookings-btn" onclick="showBookings()">My Bookings</button>
+
+  <!-- Modal for displaying bookings -->
+  <div id="myBookingModal" class="modal">
+    <div class="booking-list" id="bookingList">
+      <h2 style="text-align: center" ;>My Bookings</h2>
+      <ul id="bookingsUl"></ul>
+      <button class="closee" onclick="closeBookings()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $('.destination').click(function () {
+        var poi = $(this).data('poi');
+        document.getElementById('selectedPOI').innerText = poi;
+        var imagePath = $(this).find('img').attr('src');
+        $('.booking-image img').attr('src', imagePath);
+        openBookingModal();
+      });
+    });
+
+    function openBookingModal() {
+      var bookingModal = document.getElementById('bookingModal');
+      bookingModal.style.display = 'flex';
+    }
+
+    function closeBookingModal() {
+      var bookingModal = document.getElementById('bookingModal');
+      bookingModal.style.display = 'none';
+    }
+
+    function bookNow() {
+      var poi = document.getElementById('selectedPOI').innerText;
+      var name = document.getElementById('name').value;
+      var email = document.getElementById('email').value;
+      var phone = document.getElementById('phone').value;
+      var date = document.getElementById('datepicker').value;
+      var time = document.getElementById('time').value;
+
+      if (!name || !email || !phone || !date || !time) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      var bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+      var existingBookings = bookings.filter(function (booking) {
+        return booking.includes(poi) && booking.includes(date) && booking.includes(time);
+      });
+
+      if (existingBookings.length > 0) {
+        // The slot is already booked
+        alert('Sorry, the selected slot is already booked. Please choose another slot.');
+      } else {
+        // Book the slot
+        var bookingInfo = `${poi} - Date: ${date}, Time: ${formatTime(time)}, Name: ${name}, Email: ${email}, Phone: ${phone}`;
+        bookings.push(bookingInfo);
+        localStorage.setItem('bookings', JSON.stringify(bookings));
+        alert('Booking confirmed!');
+        closeBookingModal();
+      }
+    }
+
+
+    function formatTime(time) {
+      var formattedTime = time.split(':');
+      var hours = parseInt(formattedTime[0], 10);
+      var minutes = formattedTime[1];
+      var ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+      return hours + ':' + minutes + ' ' + ampm;
+    }
+
+
+    function removeBooking(index) {
+      var bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+      if (index >= 0 && index < bookings.length) {
+        bookings.splice(index, 1);
+        localStorage.setItem('bookings', JSON.stringify(bookings));
+        showBookings();
+        alert('Booking Removed.');
+      } else {
+        alert('Invalid index or no bookings found.');
+      }
+    }
+
+    function showBookings() {
+      var bookingList = document.getElementById('myBookingModal');
+      var bookingsUl = document.getElementById('bookingsUl');
+      var bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+
+      bookingsUl.innerHTML = '';
+
+      if (bookings.length > 0) {
+        bookings.forEach(function (booking, index) {
+          var li = document.createElement('li');
+          var details = booking.split(',');
+
+          details.forEach(function (detail) {
+            var line = document.createElement('div');
+            line.textContent = detail.trim();
+            li.appendChild(line);
+          });
+          var removeButton = document.createElement('button');
+          removeButton.textContent = 'Remove';
+          removeButton.className = 'remove-button';
+          removeButton.onclick = function () {
+            removeBooking(index);
+          };
+
+          li.appendChild(removeButton);
+          bookingsUl.appendChild(li);
+        });
+
+        bookingList.style.display = 'block';
+      } else {
+        bookingList.style.display = 'none';
+        alert('No bookings found.');
+      }
+    }
+
+    function closeBookings() {
+      var bookingList = document.getElementById('myBookingModal');
+      bookingList.style.display = 'none';
+    }
+
+    function removeBooking(index) {
+      var bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+      if (index >= 0 && index < bookings.length) {
+        bookings.splice(index, 1);
+        localStorage.setItem('bookings', JSON.stringify(bookings));
+        showBookings();
+      }
+    }
+  </script>
+</body>
+
+</html>

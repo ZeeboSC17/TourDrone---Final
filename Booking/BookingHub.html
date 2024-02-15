@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="booking.css">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <title>TourDrone Booking and Queueing</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #d2d2d2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    p{
+      margin-bottom: 50px;
+    }
+
+    #main-menu-button {
+      background-color: gray; 
+      color: #fff; 
+      border: none; 
+      padding: 10px 20px; 
+      border-radius: 5px; 
+      cursor: pointer; 
+      font-size: 16px;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    #main-menu-button:hover {
+      background-color: darkgray;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .action-button {
+      background-color: gray; 
+      color: #fff;
+      border: none;
+      padding: 20px;
+      margin: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .action-button:hover {
+      background-color: darkgray;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>TourDrone Booking and Queueing Hub</h1>
+  <p style="text-align: center;">Book a Future Appointment or Enter a Current Queue!</p>
+  <a href="../MainMenu.html" class="mainmenu">
+    <button id="main-menu-button">Main Menu</button>
+  </a>
+
+  <div class="button-container">
+    <a href="booking.html" class="action-button">Book a Future Appointment</a>
+    <a href="queue.html" class="action-button">Enter a Queue</a>
+  </div>
+</body>
+
+</html>

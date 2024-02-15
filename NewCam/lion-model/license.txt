@@ -1,0 +1,11 @@
+Model Information:
+* title:	Plastic Toy Lion .::RAWscan::.
+* source:	https://sketchfab.com/3d-models/plastic-toy-lion-rawscan-a03d5fcba1fe425abc29f0c8c7ca45ac
+* author:	Andrea Spognetta (Spogna) (https://sketchfab.com/spogna)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Plastic Toy Lion .::RAWscan::." (https://sketchfab.com/3d-models/plastic-toy-lion-rawscan-a03d5fcba1fe425abc29f0c8c7ca45ac) by Andrea Spognetta (Spogna) (https://sketchfab.com/spogna) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

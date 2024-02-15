@@ -1,0 +1,57 @@
+.joystick {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: 15px solid black;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background-color: red;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    z-index: 2;
+    border-width: 20px;
+}
+
+.up {
+    top: 15px;
+    left: 50%;
+    border-color: transparent transparent grey transparent;
+    transform: translateX(-50%);
+}
+
+.right {
+    top: 50%;
+    right: 15px;
+    border-color: transparent transparent transparent grey;
+    transform: translateY(-50%);
+}
+
+.down {
+    bottom: 15px;
+    left: 50%;
+    border-color: grey transparent transparent transparent;
+    transform: translateX(-50%);
+}
+
+.left {
+    top: 50%;
+    left: 15px;
+    border-color: transparent grey transparent transparent;
+    transform: translateY(-50%);
+}
